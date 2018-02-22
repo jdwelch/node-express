@@ -1,34 +1,29 @@
 jdw/node-express:
-  Build:
-    - npm install
-
-  PreRelease:
-    - echo "---Beginning PreRelease---"
+  PreBuild:
+    - echo "---Begin PreBuild---"
     - echo "--Installing build dependencies--"
-    - echo "-Updating apt-get-"
-    - sudo apt-get -y update
     - echo "-Installing nodejs-"
     - sudo apt-get -y install nodejs
     - echo "-Installing npm-"
     - sudo apt-get -y install npm
-    - echo "--Building--"
+
+  Build:
+    - echo "---Begin Build--"
     - npm install
 
   PkgInclude:
     - '*'
 
   PreInstall:
-    - echo "---Begining PreInstall---"
+    - echo "---Begin PreInstall---"
     - echo "--Installing deploy dependencies--"
-    - echo "-Updating apt-get-"
-    - sudo apt-get -y update
     - echo "-Installing nodejs-"
     - sudo apt-get -y install nodejs
     - echo "-Installing npm-"
     - sudo apt-get -y install npm
 
   PostInstall:
-    - echo "Begin Install"
+    - echo "---Begin PostInstall---"
     - npm install
 
   Env:
