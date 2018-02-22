@@ -1,14 +1,38 @@
 jdw/node-express:
-  Build:
-    - sudo apt-get -y install nodejs npm
-    - sudo npm install -g yarn
-    - yarn install
+  PreRelease:
+    - echo "---Beginning PreRelease---"
+    - echo "--Installing build dependencies--"
+    - echo "-Updating apt-get-"
+    - sudo apt-get -y update
+    - echo "-Installing nodejs-"
+    - sudo apt-get -y install nodejs
+    - echo "-Installing npm-"
+    - sudo apt-get -y install npm
+    - echo "--Building--"
+    - npm install
+
   PkgInclude:
     - '*'
+
+  PkgExclude:
+    - node_modules/
+
   PreInstall:
-    - sudo apt-get -y install nodejs npm
-    - sudo npm install -g yarn
+    - echo "---Begining PreInstall---"
+    - echo "--Installing deploy dependencies--"
+    - echo "-Updating apt-get-"
+    - sudo apt-get -y update
+    - echo "-Installing nodejs-"
+    - sudo apt-get -y install nodejs
+    - echo "-Installing npm-"
+    - sudo apt-get -y install npm
+
+  PostInstall:
+    - echo "Begin PostInstall"
+    - npm install
+
   Env:
-    - PORT: "3000"
+    - PORT: 3000
+
   Exec:
-    - yarn start
+    - /usr/bin/nodejs app.js
