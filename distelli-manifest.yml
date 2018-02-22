@@ -1,0 +1,13 @@
+jdoe/example-node:
+  Build:
+    - yarn install
+  PkgInclude:
+    - '*'
+  PreInstall:
+    - sudo apt-get -y update
+    - sudo apt-get -y install nodejs
+    - sudo npm install -g yarn
+  Env:
+    - PORT: "3000"
+  Exec:
+    - yarn start
