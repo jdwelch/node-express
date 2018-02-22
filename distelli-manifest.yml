@@ -1,4 +1,4 @@
-jdoe/example-node:
+jdw/node-express:
   Build:
     - yarn install
   PkgInclude:
