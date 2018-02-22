@@ -1,7 +1,7 @@
 jdw/node-express:
   Build:
     - npm install
-    
+
   PreRelease:
     - echo "---Beginning PreRelease---"
     - echo "--Installing build dependencies--"
@@ -35,4 +35,4 @@ jdw/node-express:
     - PORT: 3000
 
   Exec:
-    - /usr/bin/nodejs app.js
+    - npm start
