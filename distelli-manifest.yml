@@ -9,7 +9,6 @@ jdw/node-express:
     - echo "-Installing npm-"
     - sudo apt-get -y install npm
     - echo "--Building--"
-    - npm install
 
   PkgInclude:
     - '*'
@@ -23,10 +22,9 @@ jdw/node-express:
     - sudo apt-get -y install nodejs
     - echo "-Installing npm-"
     - sudo apt-get -y install npm
-    - npm install
 
-  PostInstall:
-    - echo "Begin PostInstall"
+  Install:
+    - echo "Begin Install"
     - npm install
 
   Env:
