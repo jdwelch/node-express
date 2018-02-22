@@ -32,7 +32,7 @@ jdw/node-express:
     - npm install
 
   Env:
-    - PORT: 3000
+    - PORT: "3000"
 
   Exec:
     - npm start
