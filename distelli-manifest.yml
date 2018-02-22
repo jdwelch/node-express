@@ -23,6 +23,7 @@ jdw/node-express:
     - sudo apt-get -y install nodejs
     - echo "-Installing npm-"
     - sudo apt-get -y install npm
+    - npm install
 
   PostInstall:
     - echo "Begin PostInstall"
