@@ -1,5 +1,8 @@
 jdw/node-express:
   Build:
+    - sudo apt-get -y update
+    - sudo apt-get -y install nodejs
+    - sudo npm install -g yarn
     - yarn install
   PkgInclude:
     - '*'
