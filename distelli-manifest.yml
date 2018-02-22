@@ -1,4 +1,7 @@
 jdw/node-express:
+  Build:
+    - npm install
+    
   PreRelease:
     - echo "---Beginning PreRelease---"
     - echo "--Installing build dependencies--"
