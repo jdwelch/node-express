@@ -1,6 +1,7 @@
 {
   "name": "node-express",
   "version": "1.0.0",
+  "description": "foo",
   "main": "app.js",
   "repository": "git@github.com:jdwelch/node-express.git",
   "author": "JD Welch <jdwelch@puppet.com>",
