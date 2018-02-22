@@ -14,9 +14,6 @@ jdw/node-express:
   PkgInclude:
     - '*'
 
-  PkgExclude:
-    - node_modules/
-
   PreInstall:
     - echo "---Begining PreInstall---"
     - echo "--Installing deploy dependencies--"
