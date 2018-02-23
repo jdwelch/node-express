@@ -30,10 +30,10 @@ jdw/node-express:
     - npm install
 
   PreStart:
-    - /usr/local/bin/pm2 -s kill
+    - sudo /usr/local/bin/pm2 -s kill
 
   Env:
     - PORT: "3000"
 
   Exec:
-    - /usr/local/bin/pm2 -s start app.js
+    - sudo /usr/local/bin/pm2 -s start app.js
