@@ -3,6 +3,7 @@ jdw/node-express:
     - echo "---Begin PreBuild---"
     - echo "--Installing build dependencies--"
     - echo "-Installing nodejs-"
+    - sudo apt-get update
     - sudo apt-get -y install nodejs
     - echo "-Installing npm-"
     - sudo apt-get -y install npm
@@ -18,6 +19,7 @@ jdw/node-express:
     - echo "---Begin PreInstall---"
     - echo "--Installing deploy dependencies--"
     - echo "-Installing nodejs-"
+    - sudo apt-get update
     - sudo apt-get -y install nodejs
     - echo "-Installing npm-"
     - sudo apt-get -y install npm
