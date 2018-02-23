@@ -32,5 +32,4 @@ jdw/node-express:
     - PORT: "3000"
 
   Exec:
-    - killall nodejs
-    - npm start
+    - npm restart
