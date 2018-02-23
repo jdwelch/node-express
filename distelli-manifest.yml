@@ -23,12 +23,14 @@ jdw/node-express:
     - sudo apt-get -y install nodejs-legacy
     - echo "-Installing npm-"
     - sudo apt-get -y install npm
-
+    - sudo npm install -g pm2
+ 
   PostInstall:
     - echo "---Begin PostInstall---"
-    - sudo npm install -g pm2
-    - /usr/local/bin/pm2 -s kill
     - npm install
+
+  PreStart:
+    - /usr/local/bin/pm2 -s kill
 
   Env:
     - PORT: "3000"
