@@ -7,6 +7,7 @@
   "author": "JD Welch <jdwelch@puppet.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "hbs": "^4.0.1"
   }
 }
