@@ -4,7 +4,7 @@ jdw/node-express:
     - echo "--Installing build dependencies--"
     - echo "-Installing nodejs-"
     - sudo apt-get update
-    - sudo apt-get -y install nodejs-legacy
+    - sudo apt-get -y install nodejs
     - echo "-Installing npm-"
     - sudo apt-get -y install npm
 
