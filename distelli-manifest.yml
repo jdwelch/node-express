@@ -1,4 +1,10 @@
 jdw/node-express:
+  Env:
+    - PORT: "3000"
+
+  PkgInclude:
+    - '*'
+
   PreBuild:
     - echo "---Begin PreBuild---"
     - echo "--Installing build dependencies--"
@@ -11,9 +17,6 @@ jdw/node-express:
   Build:
     - echo "---Begin Build--"
     - npm install
-
-  PkgInclude:
-    - '*'
 
   PreInstall:
     - echo "---Begin PreInstall---"
@@ -30,10 +33,9 @@ jdw/node-express:
     - npm install
 
   PreStart:
+    - echo "---Begin PreStart---"
     - sudo /usr/local/bin/pm2 -s kill
 
-  Env:
-    - PORT: "3000"
-
-  Exec:
+  Start:
+    - echo "---Begin Start---"
     - sudo /usr/local/bin/pm2 -s start app.js
