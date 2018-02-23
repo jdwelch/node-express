@@ -27,7 +27,7 @@ jdw/node-express:
   PostInstall:
     - echo "---Begin PostInstall---"
     - sudo npm install -g pm2
-    - /usr/local/bin/pm2 -s stop all
+    - /usr/local/bin/pm2 -s kill
     - npm install
 
   Env:
