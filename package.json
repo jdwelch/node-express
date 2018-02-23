@@ -6,9 +6,6 @@
   "repository": "git@github.com:jdwelch/node-express.git",
   "author": "JD Welch <jdwelch@puppet.com>",
   "license": "MIT",
-  "scripts": {
-    "start": "/usr/bin/nodejs app.js"
-  },
   "dependencies": {
     "express": "^4.16.2"
   }

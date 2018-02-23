@@ -26,10 +26,11 @@ jdw/node-express:
 
   PostInstall:
     - echo "---Begin PostInstall---"
+    - sudo npm install -g pm2
     - npm install
 
   Env:
     - PORT: "3000"
 
   Exec:
-    - npm restart
+    - pm2 restart app.js
