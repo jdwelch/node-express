@@ -38,4 +38,4 @@ jdw/node-express:
 
   Start:
     - echo "---Begin Start---"
-    - sudo /usr/local/bin/pm2 -s start app.js
+    - sudo /usr/local/bin/pm2 -s start server.js
