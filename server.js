@@ -15,6 +15,9 @@ var db = mongoose.connection;
 mongoose.connect('mongodb://localhost:27017/node-express-db');
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
+  app.listen(80, () => {
+    console.log('App listening on port 80!');
+  })
   console.log("Connected to MongoDB!")
 });
 
@@ -49,8 +52,4 @@ app.post('/message', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.write(JSON.stringify(newMessage))
   res.send()
-})
-
-app.listen(80, () => {
-  console.log('App listening on port 80!');
 })
