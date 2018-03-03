@@ -35,9 +35,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/message', (req, res) => {
-  Message.find (function (err, kittens) {
+  Message.find (function (err, messages) {
     if (err) return console.error(err);
-    res.send(kittens)
+    res.send(messages)
   })
   res.setHeader('Content-Type', 'application/json');
 })
