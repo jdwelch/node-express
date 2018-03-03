@@ -64,7 +64,7 @@ app.get("/message", (req, res) => {
 
 app.post("/message", (req, res) => {
   if (!req.body.text) {
-    return res.status(400).send({ message: "Your message can not be empty" });
+    return res.status(400).send({ message: "Your note can not be empty" });
   }
   var createdTime = new Date();
   var newMessage = new Message({ text: req.body.text, created: createdTime });
@@ -73,7 +73,7 @@ app.post("/message", (req, res) => {
       console.log(err);
       res
         .status(500)
-        .send({ message: "Some error occurred while creating the Note." });
+        .send({ message: "Some error occurred while creating the note." });
     } else {
       res.send(data);
     }
@@ -81,7 +81,12 @@ app.post("/message", (req, res) => {
 });
 
 app.put("/message", (req, res) => {
-  var msgId = req.query.id;
+  if (!req.body.id) {
+    return res.status(400).send({ message: "Need a note ID" });
+  } else {
+    msgId = req.body.id
+  }
+
   Message.findById(msgId, (err, updateMessage) => {
     if (err) {
       console.log(err);
@@ -117,7 +122,12 @@ app.put("/message", (req, res) => {
 });
 
 app.delete("/message", (req, res) => {
-  var msgId = req.query.id;
+  if (!req.body.id) {
+    return res.status(400).send({ message: "Need a note ID" });
+  } else {
+    msgId = req.body.id
+  }
+
   Message.findByIdAndRemove(msgId, (err, deleteMessage) => {
     if (err) {
       console.log(err);
@@ -135,6 +145,6 @@ app.delete("/message", (req, res) => {
         .status(404)
         .send({ message: "Note not found with id " + msgId });
     }
-    res.send({ message: "Note " + msgId + "deleted successfully!" });
+    res.send({ message: "Note " + msgId + " deleted successfully" });
   });
 });
