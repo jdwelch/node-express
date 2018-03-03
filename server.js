@@ -28,18 +28,24 @@ msgSchema.pre('save', function(next) {
   return next();
 });
 
-// DATABASE
-var db = mongoose.connection;
-mongoose.connect(mongoUrl);
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function() {
+app.listen(nodePort, () => {
   console.log("---App started " + new Date() + "---")
-  app.listen(nodePort, () => {
-    console.log("Node environment: " + nodeEnvironment)
-    console.log("Listening on port: " + nodePort)
-  });
-  console.log("Connected to MongoDB on: " + mongoUrl)
+  console.log("Node environment: " + nodeEnvironment)
+  console.log("Listening on port: " + nodePort)
 });
+
+var connectWithRetry = function() {
+  return mongoose.connect(mongoUrl, function(err) {
+    if (err) {
+      console.log('Failed to connect to mongo on startup - retrying in 5 sec', err);
+      setTimeout(connectWithRetry, 5000);
+    } else {
+        console.log("Connected to MongoDB on: " + mongoUrl)
+    }
+  });
+};
+
+connectWithRetry();
 
 // GUI
 app.set("view engine", "hbs");
