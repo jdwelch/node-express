@@ -1,6 +1,8 @@
 jdw/node-express:
   Env:
-    - PORT: "3000"
+    - NODE_PORT: "80"
+    - NODE_ENVIRONMENT: "prod"
+    - MONGO_URL: "mongodb://localhost:27017/node-express-db"
 
   PkgInclude:
     - '*'

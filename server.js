@@ -3,6 +3,10 @@ const os = require("os");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
+const nodeEnvironment = process.env.NODE_ENV
+const nodePort = process.env.NODE_PORT
+const mongoUrl = process.env.MONGO_URL
+
 // APP
 var app = express();
 app.use(bodyParser.json());
@@ -26,13 +30,15 @@ msgSchema.pre('save', function(next) {
 
 // DATABASE
 var db = mongoose.connection;
-mongoose.connect("mongodb://localhost:27017/node-express-db");
+mongoose.connect(mongoUrl);
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function() {
-  app.listen(80, () => {
-    console.log("App listening on port 80!");
+  console.log("---App started " + new Date() + "---")
+  app.listen(nodePort, () => {
+    console.log("Node environment: " + nodeEnvironment)
+    console.log("Listening on port: " + nodePort)
   });
-  console.log("Connected to MongoDB!");
+  console.log("Connected to MongoDB on: " + mongoUrl)
 });
 
 // GUI
@@ -40,9 +46,9 @@ app.set("view engine", "hbs");
 app.get("/", (req, res) => {
   Message.find({}).exec(function(err, messages) {
     if (err) {
-      console.log("Error:", err);
+      console.log("Error:", err)
     } else {
-      res.render("index", { hostname: os.hostname(), messages: messages });
+      res.render("index", { hostname: os.hostname(), messages: messages })
     }
   });
 });
