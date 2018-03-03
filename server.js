@@ -15,6 +15,15 @@ var msgSchema = new mongoose.Schema({
 });
 var Message = mongoose.model("Message", msgSchema);
 
+msgSchema.pre('update', function( next ) {
+  this.update({}, { $inc: { __v: 1 } }, next );
+});
+
+msgSchema.pre('save', function(next) {
+  this.increment();
+  return next();
+});
+
 // DATABASE
 var db = mongoose.connection;
 mongoose.connect("mongodb://localhost:27017/node-express-db");
