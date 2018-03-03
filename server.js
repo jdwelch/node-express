@@ -37,7 +37,6 @@ app.get('/', (req, res) => {
 app.get('/message', (req, res) => {
   Message.find (function (err, kittens) {
     if (err) return console.error(err);
-    console.log(kittens);
     res.send(kittens)
   })
   res.setHeader('Content-Type', 'application/json');
@@ -46,9 +45,7 @@ app.get('/message', (req, res) => {
 app.post('/message', (req, res) => {
   var createdTime = new Date()
   var newMessage = new Message({ text:req.body.text, created:createdTime })
-  console.log(newMessage.text)
   newMessage.save()
-  console.log('saved to database')
   res.setHeader('Content-Type', 'application/json');
   res.write(JSON.stringify(newMessage))
   res.send()
