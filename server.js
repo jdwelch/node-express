@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 // SCHEMAS
 var msgSchema = new mongoose.Schema({
   text: String,
+  created: Date,
 })
 var Message = mongoose.model('Message', msgSchema)
 
@@ -23,7 +24,14 @@ app.set('view engine', 'hbs');
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.render('index', { hostname: os.hostname() } );
+  Message.find({}).exec(function (err, messages) {
+    if (err) {
+      console.log("Error:", err);
+    }
+    else {
+      res.render('index', { hostname: os.hostname(), messages: messages } );
+    }
+  })
 })
 
 app.get('/message', (req, res) => {
@@ -36,7 +44,8 @@ app.get('/message', (req, res) => {
 })
 
 app.post('/message', (req, res) => {
-  var newMessage = new Message(req.body)
+  var createdTime = new Date()
+  var newMessage = new Message({ text:req.body.text, created:createdTime })
   console.log(newMessage.text)
   newMessage.save()
   console.log('saved to database')
