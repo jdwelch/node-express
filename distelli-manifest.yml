@@ -1,7 +1,7 @@
 jdw/node-express:
   Env:
-    - NODE_PORT: "80"
-    - NODE_ENVIRONMENT: "prod"
+    - NODE_ENV: "prod"
+    - NODE_PORT: "8080"
     - MONGO_URL: "mongodb://localhost:27017/node-express-db"
 
   PkgInclude:
@@ -41,8 +41,8 @@ jdw/node-express:
   PreStart:
     - echo "---Begin PreStart---"
     - sudo service mongod start
-    - sudo /usr/local/bin/pm2 -s kill
+    - /usr/local/bin/pm2 -s kill
 
   Start:
     - echo "---Begin Start---"
-    - sudo /usr/local/bin/pm2 -s start server.js
+    - /usr/local/bin/pm2 -s start server.js
