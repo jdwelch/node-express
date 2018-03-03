@@ -3,6 +3,10 @@ const os = require('os')
 const bodyParser= require('body-parser')
 const mongoose = require('mongoose');
 
+// APP
+var app = express();
+app.use(bodyParser.json());
+
 // SCHEMAS
 var msgSchema = new mongoose.Schema({
   text: String,
@@ -22,11 +26,8 @@ db.once('open', function() {
   console.log("Connected to MongoDB!")
 });
 
-// APP
-var app = express();
+// GUI
 app.set('view engine', 'hbs');
-app.use(bodyParser.json());
-
 app.get('/', (req, res) => {
   Message.find({}).exec(function (err, messages) {
     if (err) {
@@ -38,6 +39,7 @@ app.get('/', (req, res) => {
   })
 })
 
+// API
 app.get('/message', (req, res) => {
   Message.find (function (err, messages) {
     if (err) return console.error(err);
@@ -63,5 +65,12 @@ app.put('/message', (req,res) => {
     message.updated = new Date()
     message.save()
     res.send(message)
+  })
+})
+
+app.delete('/message', (req,res) => {
+  var msgId = req.query.id
+  Message.findByIdAndRemove(msgId, (err,message) => {
+    res.send({message: "Deleted successfully"})
   })
 })
