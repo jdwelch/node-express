@@ -5,7 +5,16 @@
 <p>These are my messages:</p>
 {{#each messages}}
   <p style="font-family: 'Helvetica Neue'">
-  {{this.text}} <br /><small style="color:#275956">{{this.id}} - {{this.created}}</small>
+  {{this.text}} <br /><small style="color:#275956">
+    {{#if this.updated}}
+      <strong>edited</strong> {{this.updated}}
+      <br/><strong>originial:</strong> {{this.created}}
+
+    {{else}}
+      {{this.created}}
+    {{/if}}
+    <br />{{this.id}}
+  </small>
   </p>
 {{/each}}
 </body>

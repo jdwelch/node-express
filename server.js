@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 var msgSchema = new mongoose.Schema({
   text: String,
   created: Date,
+  updated: Date,
 })
 var Message = mongoose.model('Message', msgSchema)
 
@@ -52,4 +53,15 @@ app.post('/message', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.write(JSON.stringify(newMessage))
   res.send()
+})
+
+app.put('/message', (req,res) => {
+  res.setHeader('Content-Type', 'application/json');
+  var msgId = req.query.id
+  Message.findById(msgId, (err,message) => {
+    message.text = req.body.text;
+    message.updated = new Date()
+    message.save()
+    res.send(message)
+  })
 })
