@@ -28,9 +28,6 @@ deploy:
 	kubectl create -f mongo-deployment.yaml
 	kubectl create -f node-express-deployment.yaml
 
-stop-mini:
+stop-deploy:
 	kubectl delete -f node-express-deployment.yaml
 	kubectl delete -f mongo-deployment.yaml
-
-all: build deploy
-
