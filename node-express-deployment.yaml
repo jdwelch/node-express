@@ -30,7 +30,7 @@ spec:
         app: node-express
     spec:
       containers:
-      - image: node-express:v1
+      - image: gcr.io/proj-genesis/node-express:latest
         name: node-express
         ports:
         - containerPort: 8080
