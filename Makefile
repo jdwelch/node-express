@@ -3,7 +3,17 @@ $(error GCP_PROJECT is not set)
 endif
 
 CONTAINER_NAME = node-express
-CLUSTER_NAME = `kubectl config current-context`
+CLUSTER_NAME = cluster-express
+ZONE = europe-west1-b
+
+bootstrap:
+	gcloud beta container --project "$(GCP_PROJECT)" \
+	clusters create "$(CLUSTER_NAME)" --zone "$(ZONE)" \
+	--username "admin" --cluster-version "1.10.5-gke.3" --machine-type "g1-small" \
+	--image-type "COS" --disk-type "pd-standard" --disk-size "100" --scopes "https://www.googleapis.com/auth/devstorage.read_only","https://www.googleapis.com/auth/logging.write","https://www.googleapis.com/auth/monitoring","https://www.googleapis.com/auth/servicecontrol","https://www.googleapis.com/auth/service.management.readonly","https://www.googleapis.com/auth/trace.append" \
+	--num-nodes "3" --enable-cloud-logging --enable-cloud-monitoring --network "default" \
+	--subnetwork "default" --addons HorizontalPodAutoscaling,HttpLoadBalancing --no-enable-autoupgrade \
+	--enable-autorepair
 
 run-db:
 	mongod --dbpath ./data
@@ -31,3 +41,9 @@ deploy:
 stop-deploy:
 	kubectl delete -f node-express-deployment.yaml
 	kubectl delete -f mongo-deployment.yaml
+
+destroy:
+	gcloud container clusters delete $(CLUSTER_NAME) --zone $(ZONE)
+
+show:
+	@echo "http://`kubectl get service node-express -o jsonpath={.status.loadBalancer.ingress[0].ip}`:8080"
