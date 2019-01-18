@@ -23,14 +23,6 @@ build-docker:
 	@echo "🔘 Pushing '$(CONTAINER_NAME)' container to GCP Container Registry..."
 	docker push gcr.io/$(GCP_PROJECT)/$(CONTAINER_NAME):latest
 
-deploy:
-	kubectl create -f mongo-deployment.yaml
-	kubectl create -f node-express-deployment.yaml
-
-stop-deploy:
-	kubectl delete -f node-express-deployment.yaml
-	kubectl delete -f mongo-deployment.yaml
-
 show:
 	@echo "http://`kubectl get service node-express -o jsonpath={.status.loadBalancer.ingress[0].ip}`:8080"
 
