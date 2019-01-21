@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-mongo
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-mongo
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-mongo
+    spec:
+      containers:
+      - image: mongo
+        name: mongo
+        ports:
+        - containerPort: 27017
+          name: mongo
+        volumeMounts:
+        - name: {{ .Release.Name }}-mongo-persistent-storage
+          mountPath: /data
+      volumes:
+      - name: {{ .Release.Name }}-mongo-persistent-storage
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-mongo-pv-claim

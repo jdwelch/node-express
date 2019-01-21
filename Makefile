@@ -16,7 +16,7 @@ bootstrap:
 	--enable-autorepair
 
 run-db:
-	mongod --dbpath ./data
+	mongod --dbpath /tmp/data
 
 run:
 	npm install
@@ -47,3 +47,6 @@ destroy:
 
 show:
 	@echo "http://`kubectl get service node-express -o jsonpath={.status.loadBalancer.ingress[0].ip}`:8080"
+
+data:
+	bash tasks/fakedata.sh `kubectl get service node-express -o jsonpath={.status.loadBalancer.ingress[0].ip}`:8080
